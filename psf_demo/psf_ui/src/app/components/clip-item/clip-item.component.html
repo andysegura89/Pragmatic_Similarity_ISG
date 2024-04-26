@@ -1,0 +1,25 @@
+<div class="clip">
+    <h3>{{ clip.path }} 
+        <fa-icon 
+            (click)="onDelete(clip)"
+            [ngStyle]="{color: 'red'}" 
+            [icon]="faTimes">
+        </fa-icon>
+        <fa-icon 
+            (click)="onPlay(clip.path)"
+            [ngStyle]="{color: 'green'}" 
+            [icon]="faPlay">
+        </fa-icon>
+        <fa-icon 
+            (click)="onPlay('fp-' + clip.path)"
+            [ngStyle]="{color: 'yellow'}" 
+            [icon]="faPlay">
+        </fa-icon>
+        <fa-icon 
+            (click)="onPlay('sp-' + clip.path)"
+            [ngStyle]="{color: 'orange'}" 
+            [icon]="faPlay">
+        </fa-icon>
+    </h3>
+    <p>wrong</p>
+</div>

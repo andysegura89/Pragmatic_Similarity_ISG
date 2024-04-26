@@ -1,0 +1,134 @@
+<div class="w-4/4 shadow-md p-10 bg-white shadow-blue-200/20 mx-36 my-10">
+    <app-recording (onToggleRecord)="toggleRecord($event)"></app-recording>
+
+<div class="page-selector">
+    <select class="border p-2 rounded-1g" #pageSize (change)="changePageSize(pageSize.value)">
+        <option *ngFor="let size of pageSizes" [value]="size"> {{size}} </option>
+    </select>
+</div>
+
+<table class="w-full border-4">
+    <thead>
+        <tr>
+            <th class="p-3 text-left bg-gray-200" (click)="reverseList()">ID</th>
+            <th class="p-3 text-left bg-gray-200">File Name</th>
+            <th class="p-3 text-left bg-gray-200">Duration</th>
+            <th class="p-3 text-left bg-gray-200">Dataset</th>
+            <th class="p-3 text-left bg-gray-200">Your Clip</th>
+            <th class="p-3 text-left bg-gray-200">Best Match</th>
+            <th class="p-3 text-left bg-gray-200">2nd Best</th>
+            <th class="p-3 text-left bg-gray-200">10000th Best</th>
+            <th class="p-3 text-left bg-gray-200">15000th Best</th>
+            <th class="p-3 text-left bg-gray-200">Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let clip of visibleData()">
+            <td class="p-3 border-2">{{clip.id}}</td>
+            <td class="p-3 border-2">{{clip.path}}</td>
+            <td class="p-3 border-2">{{clip.duration}} Seconds</td>
+            <td class="p-3 border-2">{{clip.dataset}}</td>
+            <td class="p-3 border-2 justify-center">
+                <fa-icon 
+                    class="mx-auto"
+                    (click)="playClip(clip.path)"
+                    [ngStyle]="{color: 'black'}" 
+                    [icon]="faPlay">
+                </fa-icon>
+            </td>
+            <td class="p-3 border-2">
+                <mat-progress-spinner *ngIf="clip.best_path == null" mode="indeterminate" diameter="30"></mat-progress-spinner>
+                <div *ngIf="clip.best_path != null">
+                    cos_sim={{clip.best_cos}}
+                    <br>
+                    <fa-icon 
+                        *ngIf="clip.dataset != 'ASDNT'"
+                        class="mx-auto"
+                        (click)="playClip('fp-' + clip.path)"
+                        [ngStyle]="{color: 'green'}" 
+                        [icon]="faPlay">
+                    </fa-icon>
+                    <div *ngIf="clip.dataset === 'ASDNT'">
+                        {{clip.best_asd_label}}
+                    </div>
+                </div>
+                
+            </td>
+            <td class="p-3 border-2">
+                <mat-progress-spinner *ngIf="clip.best_path == null" mode="indeterminate" diameter="30"></mat-progress-spinner>
+                <div *ngIf="clip.best_path != null">
+                    cos_sim={{clip.second_cos}}
+                    <br>
+                    <fa-icon 
+                        *ngIf="clip.dataset != 'ASDNT'"
+                        class="mx-auto"
+                        (click)="playClip('sp-' + clip.path)"
+                        [ngStyle]="{color: 'orange'}" 
+                        [icon]="faPlay">
+                    </fa-icon>
+                    <div *ngIf="clip.dataset == 'ASDNT'">
+                        {{clip.second_asd_label}}
+                    </div>
+                </div>
+                
+            </td>
+            <td class="p-3 border-2">
+                <mat-progress-spinner *ngIf="clip.best_path == null" mode="indeterminate" diameter="30"></mat-progress-spinner>
+                <div *ngIf="clip.hundred_path != null">
+                    cos_sim={{clip.hundred_cos}}
+                    <br>
+                    <fa-icon
+                        *ngIf="clip.dataset != 'ASDNT'"
+                        class="mx-auto"
+                        (click)="playClip('1p-' + clip.path)"
+                        [ngStyle]="{color: 'blue'}" 
+                        [icon]="faPlay">
+                    </fa-icon>
+                    <div *ngIf="clip.dataset == 'ASDNT'">
+                        {{clip.hundred_asd_label}}
+                    </div>
+                </div>
+                
+            </td>
+            <td class="p-3 border-2">
+                <mat-progress-spinner *ngIf="clip.best_path == null" mode="indeterminate" diameter="30"></mat-progress-spinner>
+                <div *ngIf="clip.five_hundred_path != null">
+                    cos_sim={{clip.five_hundred_cos}}
+                    <br>
+                    <fa-icon
+                    *ngIf="clip.dataset != 'ASDNT'" 
+                    class="mx-auto"
+                    (click)="playClip('5p-' + clip.path)"
+                    [ngStyle]="{color: 'orange'}" 
+                    [icon]="faPlay">
+                </fa-icon>
+                <div *ngIf="clip.dataset == 'ASDNT'">
+                    {{clip.five_hundred_asd_label}}
+                </div>
+                </div>      
+            </td>
+            <td class="p-3 border-2">
+                <fa-icon      
+                (click)="deleteClip(clip)"
+                [ngStyle]="{color: 'black'}" 
+                [icon]="faTimes"
+                class="mx-auto">
+            </fa-icon>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="mt-4 flex items-center justify-center">
+    <button class="text-cyan-500 border-4 py-2 px-4 rounded-1-lg cursor-pointer mr-5" (click)="previousPage()">Previous</button>
+    <button 
+        *ngFor="let pageNumber of pageNumbers(); let i = index" 
+        class ="py-2 px-4 cursor-pointer"
+        [class.bg-cyan-500]="i+1 == currentPage"
+        [class.text-white]="i+1 == currentPage"
+        (click)="changePage(i + 1)"
+        > {{i + 1}} </button>
+    <button class="text-cyan-500 border-4 py-2 px-4 cursor-pointer rounded-r-lg ml-5" (click)="nextPage()">Next</button>
+</div>
+</div>
+<button class="text-cyan-500 border-4 py-2 px-4 cursor-pointer rounded-r-lg ml-5" (click)="loadSavedClips()">Load Saved Clips</button>

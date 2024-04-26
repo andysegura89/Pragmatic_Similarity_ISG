@@ -1,0 +1,65 @@
+.recording-component {
+    border: 3px solid #ccc; /* Add a subtle border */
+    border-radius: 5px; /* Soften the edges */
+    padding: 1rem; /* Create spacing around content */
+    max-width: 300px; /* Limit width for focused appearance */
+    margin: 0 auto; /* Center the component horizontally */
+  }
+  
+  .recording-button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 1rem;
+    background-color: #eee;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer; /* Indicate interactivity */
+    margin-bottom: 1rem; /* Add spacing below the button */
+    width: 30%;
+    margin: auto auto; /* Center horizontally */
+    display: block;
+  }
+  
+  .recording-button:hover {
+    background-color: #ddd; /* Add hover effect */
+  }
+  
+  .recording-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .recording-icon {
+    margin-left: 1.15rem;
+  }
+
+  .radio-group {
+    display: flex;
+    flex-direction: row;
+    margin: 5px 0px;
+    align-items: flex-start;
+  }
+
+  .radio-group-label {
+    margin: 0px 62px;
+    font-size: medium;
+    font-weight: bold;
+  }
+  
+  .radio-button {
+    margin: 1px;
+  }
+  
+  .gender-section {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    height: 30px;
+    margin: 5px 45px;
+  }
+  
+  .gender-boxes {
+    margin: 0 0px;
+  }
+  

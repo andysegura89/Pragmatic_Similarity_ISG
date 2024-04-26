@@ -1,0 +1,28 @@
+<div class="recording-component">
+ <label class="radio-group-label">Pick your dataset</label>
+    <mat-radio-group
+      aria-labelledby="radio-group-label"
+      [color]="'primary'"
+      class="radio-group"
+      [(ngModel)]="selectedDataset">
+      @for (ds of datasets; track ds) {
+        <mat-radio-button class="radio-button" [value]="ds">{{ds}}</mat-radio-button>
+      }
+    </mat-radio-group>
+    <section class="gender-section" *ngIf="selectedDataset === 'SWBD'">
+        <mat-checkbox class="gender-boxes" [(ngModel)]="male">male</mat-checkbox>
+        <mat-checkbox class="gender-boxes" [(ngModel)]="female">female</mat-checkbox>
+      </section>
+<br>
+<div class="recording-button" (click)="toggleRecording()" [@recordingOutline]="isRecording ? 'recording' : 'inactive'">
+    Record
+    <div
+    class="recording-container" 
+    [@recordingState]="isRecording ? 'pulse' : 'inactive'">
+    <fa-icon
+            [icon]="faMicrophone"
+            class="recording-icon">
+    </fa-icon>
+    </div>
+</div>
+</div>

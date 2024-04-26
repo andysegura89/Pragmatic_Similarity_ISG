@@ -1,0 +1,8 @@
+h1 {
+    font-size: 48px; /* Makes the text larger */
+    font-family: 'Arial', sans-serif; /* A nice, commonly used font. You can choose others */
+    color: #333; /* Sets the text color. This is a dark gray. */
+    display: flex;
+    justify-content: center;
+
+}
