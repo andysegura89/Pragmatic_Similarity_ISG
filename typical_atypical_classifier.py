@@ -331,7 +331,8 @@ class TypicalClassifier:
 
 
 def write_csv(path, header, rows):
-    with open(path, 'w') as csvfile:
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with open(path, 'w+') as csvfile:
         csvwriter = csv.writer(csvfile)
         csvwriter.writerow(header)
         csvwriter.writerows(rows)
