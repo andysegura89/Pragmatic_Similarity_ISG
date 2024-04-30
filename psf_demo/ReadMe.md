@@ -20,7 +20,7 @@ belongs to.
 
 ### How to run
 
-In the frontend folder run the following command
+In the psf_ui folder run the following command
 
 ```
 ng serve
@@ -29,7 +29,7 @@ ng serve
 In the psf_demo folder, run the following command
 
 ```
-python3 rest_api.py
+python rest_api.py
 ```
 
 Go to this address in your browser
