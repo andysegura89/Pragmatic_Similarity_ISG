@@ -37,6 +37,10 @@ Go to this address in your browser
 locahhost:4200
 ```
 
+To change the audio input go into line 73 of audio_recorder.py
+Set input_device_index parameter to 0 for volt or 2 for laptop microphone.
+
+
 
 
 
